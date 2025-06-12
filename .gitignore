@@ -12,3 +12,4 @@ db.sqlite3
 settings.json
 launch.json
 .pylintrc
+__pycache__
