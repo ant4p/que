@@ -1,1 +1,14 @@
+.idea
 venv
+.env
+db.sqlite3
+/migrations
+/articles/migrations/
+/products/migrations/
+/services/migrations/
+/src/migrations/
+/tags/migrations/
+.vscode
+settings.json
+launch.json
+.pylintrc
