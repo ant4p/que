@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Order(models.Model):
@@ -16,3 +17,6 @@ class Order(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+    def get_success_url(self):
+        return reverse("order", kwargs={"slug": self.object.slug})
