@@ -11,12 +11,10 @@ class Order(models.Model):
     material = models.CharField(max_length=200, verbose_name="Материал")
     client = models.CharField(max_length=200, verbose_name="Клиент")
     start_time = models.DateTimeField(
-        default=datetime.now, blank=True,
-        verbose_name="Начало выполнения"
+        default=datetime.now, blank=True, verbose_name="Начало выполнения"
     )
     end_time = models.DateTimeField(
-        default=datetime.now, blank=True,
-        verbose_name="Конец выполнения"
+        default=datetime.now, blank=True, verbose_name="Конец выполнения"
     )
     # full_time = models.TimeField(editable=False, blank=True, verbose_name='Общее время')
 
@@ -35,5 +33,5 @@ class Order(models.Model):
     @property
     def time_difference(self):
         if self.start_time and self.end_time:
-             return self.end_time - self.start_time
+            return self.end_time - self.start_time
         return None
