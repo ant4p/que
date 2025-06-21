@@ -7,6 +7,13 @@
     <p>{{ printer.serial_number }}</p>
 
     <p><br></p>
+
+    {% for o in orders_data %}
+    <p>{{ o.title }}</p>
+    <p>{{ o.status }}</p>
+    <a href="{{ o.get_absolute_url }}">{{ o.title }}</a>
+
+    {% endfor %}
     
 
 

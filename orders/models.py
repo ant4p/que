@@ -2,8 +2,16 @@ from datetime import datetime
 from django.db import models
 from django.urls import reverse
 
+from core.models import BaseModel
+from printers.models import Printer
 
-class Order(models.Model):
+
+class Order(BaseModel):
+    STATUS_CHOICE = (
+        ("create", "create"),
+        ("process", "process"),
+        ("complete", "complete"),
+    )
 
     title = models.CharField(max_length=200, verbose_name="Заказ")
     slug = models.SlugField(max_length=220, verbose_name="Slug")
@@ -16,7 +24,17 @@ class Order(models.Model):
     end_time = models.DateTimeField(
         default=datetime.now, blank=True, verbose_name="Конец выполнения"
     )
-    # full_time = models.TimeField(editable=False, blank=True, verbose_name='Общее время')
+    status = models.CharField(
+        max_length=50,
+        choices=STATUS_CHOICE,
+        default="create",
+        null=True,
+        blank=True,
+        verbose_name="Статус",
+    )
+    printers = models.ManyToManyField(
+        Printer, blank=True, null=True, verbose_name="Принтеры"
+    )
 
     class Meta:
         db_table = "orders"
@@ -29,6 +47,9 @@ class Order(models.Model):
 
     def get_success_url(self):
         return reverse("order", kwargs={"slug": self.object.slug})
+
+    def get_absolute_url(self):
+        return reverse("orders:order", kwargs={"slug": self.slug})
 
     @property
     def time_difference(self):

@@ -7,6 +7,15 @@
     <p>{{ order.quantity }}</p>
     <p>{{ order.material }}</p>
     <p>{{ order.client }}</p>
+    <p>{{ order.created_at }}</p>
+    <p>{{ order.updated_at }}</p>
+    <p>{{ order.client }}</p>
+    <p><br></p>
+    {% for printer in order.printers.all %}
+    <p>{{ printer.title }}</p>
+    <a href="{{ printer.get_absolute_url }}">{{ printer.slug }}</a>
+    {% endfor %}
+
     <p><br></p>
     
 
