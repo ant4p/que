@@ -9,13 +9,14 @@ class OrderAdmin(admin.ModelAdmin):
         "client",
         "printers__title",
         "get_printers",
-        'status',
+        "status",
     )
     prepopulated_fields = {"slug": ("title",)}
     readonly_fields = ("time_difference",)
 
     @admin.display(description="Принтеры")
     def get_printers(self, obj):
-        return Order.objects.filter(printers__id=obj.id)
+        return "\n".join([str(p) for p in obj.printers.all()])
+
 
 admin.site.register(Order, OrderAdmin)
