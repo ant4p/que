@@ -25,5 +25,6 @@ urlpatterns = [
     path('printers/', include('printers.urls', namespace='printers')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('api.urls', namespace='api')),
+    path('reports/', include('reports.urls', namespace='reports')),
     path('api-token-auth/', views.obtain_auth_token),
 ]

@@ -1,0 +1,36 @@
+<div>
+
+
+
+    <p>{{ report.title }}</p>
+    <p>{{ report.slug }}</p>
+    <p>Данные с {{ report.start_day }} по {{ report.end_day }}</p>
+
+    <p><br></p>
+
+    <p>Принтеры в отчёте:</p>
+    <p><br></p>
+
+    {% for p in printers_data %}
+    <p>{{ p.title }}</p>
+    <p>{{ p.serial_number }}</p>
+
+    <p><br></p>
+
+    {% endfor %}
+
+    {% for o in orders_data %}
+    <p>{{ o.title }}</p>
+    <p>{{ o.status }}</p>
+    <p>{{ o.start_time }}</p>
+    <p>{{ o.end_time }}</p>
+    <a href="{{ o.get_absolute_url }}">{{ o.title }}</a>
+    <p><br></p>
+
+    {% endfor %}
+    
+    
+
+
+
+</div>

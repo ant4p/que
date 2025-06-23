@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'orders',
     'printers',
     'api',
+    'reports',
 ]
 
 MIDDLEWARE = [

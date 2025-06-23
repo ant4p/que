@@ -11,7 +11,10 @@
     {% for o in orders_data %}
     <p>{{ o.title }}</p>
     <p>{{ o.status }}</p>
+    <p>{{ o.start_time }}</p>
+    <p>{{ o.end_time }}</p>
     <a href="{{ o.get_absolute_url }}">{{ o.title }}</a>
+    <p><br></p>
 
     {% endfor %}
     

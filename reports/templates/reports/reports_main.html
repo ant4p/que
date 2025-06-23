@@ -1,0 +1,17 @@
+<div>
+
+    {% for x in reports_list %}
+
+    <p>{{ x.title }}</p>
+    <a href="{{ x.slug }}">{{ x.slug }}</a>
+    <p>{{ x.start_day }} ---- {{ x.end_day }}</p>
+    {% for printer in x.printers.all %}
+    <p>{{ printer.title }}</p>
+    {% endfor %}
+
+    <p><br></p>
+    
+
+    {% endfor %}
+
+</div>
