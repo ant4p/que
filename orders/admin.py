@@ -7,7 +7,6 @@ class OrderAdmin(admin.ModelAdmin):
         "title",
         "time_difference",
         "client",
-        "printers__title",
         "get_printers",
         "status",
     )

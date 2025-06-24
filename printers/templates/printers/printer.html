@@ -1,24 +1,21 @@
+<h3>ПРИНТЕР</h3>
+
 <div>
-
-
 
     <p>{{ printer.title }}</p>
     <p>{{ printer.slug }}</p>
     <p>{{ printer.serial_number }}</p>
 
     <p><br></p>
-
+    <h3>Заказы на этом принтере:</h3>    
     {% for o in orders_data %}
-    <p>{{ o.title }}</p>
-    <p>{{ o.status }}</p>
-    <p>{{ o.start_time }}</p>
-    <p>{{ o.end_time }}</p>
-    <a href="{{ o.get_absolute_url }}">{{ o.title }}</a>
+    <p>Номер заказа: {{ o.title }}</p>
+    <p>Статус заказа: {{ o.status }}</p>
+    <p>Начало выполнения заказа: {{ o.start_time }}</p>
+    <p>Конец выполнения заказа: {{ o.end_time }}</p>
+    <a href="{{ o.get_absolute_url }}">Перейти в заказ - {{ o.title }}</a>
     <p><br></p>
 
     {% endfor %}
-    
-
-
 
 </div>

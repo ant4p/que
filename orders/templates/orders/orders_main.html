@@ -1,12 +1,15 @@
+<h3>ЗАКАЗЫ</h3>
 <div>
 
     {% for x in orders_list %}
 
-    <p>{{ x.title }}</p>
+    <p> Заказ №: {{ x.id }}</p>
+    <p> Заказ: {{ x.title }}</p>
+    <p> Перейти в заказ:</p>
     <a href="{{ x.slug }}">{{ x.slug }}</a>
-    <p>{{ x.quantity }}</p>
-    <p>{{ x.material }}</p>
-    <p>{{ x.client }}</p>
+    <p>Количество: {{ x.quantity }}</p>
+    <p>Материал: {{ x.material }}</p>
+    <p>Клиент: {{ x.client }}</p>
     <p><br></p>
     
 

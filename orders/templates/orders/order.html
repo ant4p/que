@@ -1,19 +1,22 @@
+
+<h3>ЗАКАЗ</h3>
 <div>
 
 
 
-    <p>{{ order.title }}</p>
+    <p> Заказ №:{{ order.id }} Заказ: {{ order.title }}</p>
     <p>{{ order.slug }}</p>
-    <p>{{ order.quantity }}</p>
-    <p>{{ order.material }}</p>
-    <p>{{ order.client }}</p>
-    <p>{{ order.created_at }}</p>
-    <p>{{ order.updated_at }}</p>
-    <p>{{ order.client }}</p>
+    <p>Количество: {{ order.quantity }}</p>
+    <p>Материал: {{ order.material }}</p>
+    <p>Заказ создан: {{ order.created_at }}</p>
+    <p>Заказ обновлен: {{ order.updated_at }}</p>
+    <p>Клиент: {{ order.client }}</p>
     <p><br></p>
+
+    <h3>Принтеры используются:</h3>
     {% for printer in order.printers.all %}
-    <p>{{ printer.title }}</p>
-    <a href="{{ printer.get_absolute_url }}">{{ printer.slug }}</a>
+    <p>{{ printer.title }} <a href="{{ printer.get_absolute_url }}">{{ printer.slug }}</a> </p>
+
     {% endfor %}
 
     <p><br></p>

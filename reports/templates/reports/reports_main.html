@@ -1,16 +1,19 @@
 <div>
+    <h3>ОТЧЁТЫ</h3>
 
     {% for x in reports_list %}
 
-    <p>{{ x.title }}</p>
-    <a href="{{ x.slug }}">{{ x.slug }}</a>
-    <p>{{ x.start_day }} ---- {{ x.end_day }}</p>
+    <p>Отчёт: {{ x.title }} <a href="{{ x.slug }}">{{ x.slug }}</a> </p>
+    
+    <p>С {{ x.start_day }} по {{ x.end_day }}</p>
+
+    <h3>Принтеры участвующие в отчёте: </h3>
     {% for printer in x.printers.all %}
     <p>{{ printer.title }}</p>
     {% endfor %}
 
     <p><br></p>
-    
+
 
     {% endfor %}
 

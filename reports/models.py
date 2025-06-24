@@ -1,4 +1,6 @@
 from datetime import datetime
+from django.urls import reverse
+
 from django.db import models
 
 from core.models import BaseModel
@@ -17,6 +19,9 @@ class Report(BaseModel):
     printers = models.ManyToManyField(
         Printer, blank=True, null=True, verbose_name="Принтеры"
     )
+
+    def get_absolute_url(self):
+        return reverse("reports:report", kwargs={"slug": self.slug})
 
     class Meta:
         db_table = "reports"

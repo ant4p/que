@@ -33,7 +33,7 @@ class Order(BaseModel):
         verbose_name="Статус",
     )
     printers = models.ManyToManyField(
-        Printer, blank=True, null=True, verbose_name="Принтеры"
+        Printer, blank=True, verbose_name="Принтеры"
     )
 
     class Meta:

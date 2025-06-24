@@ -1,10 +1,12 @@
+
+<h3>ПРИНТЕРЫ</h3>
 <div>
 
     {% for x in printers_list %}
 
-    <p>{{ x.title }}</p>
-    <a href="{{ x.slug }}">{{ x.slug }}</a>
-    <p>{{ x.quantity }}</p>
+    <p>{{ x.title }} <a href="{{ x.slug }}">{{ x.slug }}</a> </p>
+
+    <p>Serial_number: {{ x.serial_number }}</p>
     <p>{{ x.material }}</p>
     <p>{{ x.client }}</p>
     <p><br></p>

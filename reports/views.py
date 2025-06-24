@@ -20,17 +20,20 @@ class ReportView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        instanse = Report.objects.get()
+        print(context)
+        instanse = Report.objects.get(slug=self.kwargs["slug"])
         start_day = str(instanse.start_day)
-        print('taatatat')
-        print('taatatat')
-        print('taatatat')
-        print('taatatat')
+        print("taatatat")
+        print("taatatat")
+        print("taatatat")
+        print("taatatat")
         print(start_day)
         end_day = str(instanse.end_day)
         print(end_day)
-        orders = Order.objects.filter(start_time__date__gte=start_day).filter(
-            end_time__date__lte=end_day
+        orders = (
+            Order.objects.filter(start_time__date__gte=start_day)
+            .filter(end_time__date__lte=end_day)
+            # .filter(printers__slug=instanse.printers)
         )
 
         context["orders_data"] = orders
