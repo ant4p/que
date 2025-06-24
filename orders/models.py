@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.db import models
+from django.db.models import ExpressionWrapper, F, DurationField
 from django.urls import reverse
 
 from core.models import BaseModel
@@ -26,6 +27,7 @@ class Order(BaseModel):
     end_time = models.DateTimeField(
         default=datetime.now, blank=True, verbose_name="Конец выполнения"
     )
+
     status = models.CharField(
         max_length=50,
         choices=STATUS_CHOICE,

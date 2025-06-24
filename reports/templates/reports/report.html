@@ -10,23 +10,34 @@
 
     <h3>Принтеры в отчёте:</h3>
     <p><br></p>
-
+    
     {% for p in printers_data %}
     <p>{{ p.title }}</p>
+    {% endfor %}
+
+    <h3>Суммарное время работы принтера над заказами:</h3>
+
+    <p>{{ total_sum_data }}</p>
+
+    <h3>Суммарное количество заказов:</h3>
+
+    <p>{{ orders_count }}</p>
 
     <p><br></p>
 
-    {% endfor %}
+    <p><br></p>
 
     <h3>Заказы в отчёте:</h3>
     {% for o in orders_data %}
+    <p>{{ o.new_field }}</p>
     <p>Заказ: {{ o.title }} <a href="{{ o.get_absolute_url }}">{{ o.title }}</a> </p>
     <p>Статус заказа: {{ o.status }}</p>
     <p>Начало выполнения заказа: {{ o.start_time }}</p>
     <p>Конец выполнения заказа: {{ o.end_time }}</p>
+    <p>Время выполнения: {{ o.time_difference }}</p>
     
     <p><br></p>
-
+    <p>{{ o.total_sum }}</p>
     {% endfor %}
     
     
