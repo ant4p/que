@@ -1,16 +1,9 @@
-from django.db import models
 from django.db.models import (
     F,
-    Avg,
-    DateField,
-    DateTimeField,
     DurationField,
     ExpressionWrapper,
     Sum,
-    Value,
-    fields,
 )
-from django.db.models.functions import Cast, ExtractHour
 from django.views.generic import DetailView, ListView
 
 from orders.models import Order
@@ -59,7 +52,7 @@ class ReportView(DetailView):
         total_sum = orders.aggregate(Sum("new_field"))["new_field__sum"]
         print(total_sum)
         return total_sum
-    
+
     def add_orders_count(self):
         orders = self.get_orders()
         count = orders.count()

@@ -1,6 +1,5 @@
 from datetime import datetime
 from django.db import models
-from django.db.models import ExpressionWrapper, F, DurationField
 from django.urls import reverse
 
 from core.models import BaseModel
@@ -36,9 +35,7 @@ class Order(BaseModel):
         blank=True,
         verbose_name="Статус",
     )
-    printers = models.ManyToManyField(
-        Printer, blank=True, verbose_name="Принтеры"
-    )
+    printers = models.ManyToManyField(Printer, blank=True, verbose_name="Принтеры")
 
     class Meta:
         db_table = "orders"
