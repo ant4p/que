@@ -8,9 +8,11 @@ from printers.models import Printer
 
 class Order(BaseModel):
     STATUS_CHOICE = (
-        ("create", "create"),
-        ("process", "process"),
-        ("complete", "complete"),
+        ("create", "Создан"),
+        ("process", "В работе"),
+        ("complete", "Выполнен"),
+        ("correction", "Коррекция"),
+        ("canceled", "Отменён"),
     )
 
     title = models.CharField(max_length=200, verbose_name="Заказ")
@@ -27,7 +29,7 @@ class Order(BaseModel):
     status = models.CharField(
         max_length=50,
         choices=STATUS_CHOICE,
-        default="create",
+        default="Создан",
         null=True,
         blank=True,
         verbose_name="Статус",
