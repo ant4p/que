@@ -38,6 +38,7 @@ class Order(BaseModel):
     printers = models.ManyToManyField(Printer, blank=True, verbose_name="Принтеры")
 
     class Meta:
+        unique_together = ('start_time', 'end_time')
         db_table = "orders"
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
