@@ -17,7 +17,7 @@ class Report(BaseModel):
         default=datetime.now, blank=True, verbose_name="Конец отчета"
     )
     printers = models.ManyToManyField(
-        Printer, blank=True, null=True, verbose_name="Принтеры"
+        Printer, blank=True, verbose_name="Принтеры"
     )
 
     def get_absolute_url(self):

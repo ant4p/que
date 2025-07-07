@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'printers',
     'api',
     'reports',
+    'timeline',
 ]
 
 MIDDLEWARE = [

@@ -1,10 +1,12 @@
 from datetime import datetime
+from django.core.exceptions import ValidationError
 from django.db import models
-from django.db.models import Q
+
+# from django.db.models import Q
 from django.urls import reverse
 
 from core.models import BaseModel
-from printers.models import Printer
+from timeline.models import Timeline
 
 
 class Order(BaseModel):
@@ -36,29 +38,14 @@ class Order(BaseModel):
         blank=True,
         verbose_name="Статус",
     )
-    printers = models.ManyToManyField(Printer, blank=True, verbose_name="Принтеры")
+    printers = models.ManyToManyField(Timeline, blank=True, verbose_name="Принтеры")
 
     class Meta:
-        unique_together = ('start_time', 'end_time')
+        unique_together = ("start_time", "end_time")
         db_table = "orders"
         verbose_name = "Заказ"
         verbose_name_plural = "Заказы"
         ordering = ["-id"]
-
-    def order_unique(self, model, start_time, end_time, **kwargs):
-        query = Q(start_time__lte=end_time, end_time_gte=start_time)
-        if kwargs:
-            query &= Q(**kwargs)
-        return model.objects.filter(query).exists()
-
-    
-    def save(self, *args, **kwargs):
-        # date_time = Order.objects.filter(Q(start_time__lte=self.start_time) & Q(end_time__gte=self.end_time))
-        # print(date_time)
-        if Order.objects.filter(Q(start_time__lte=self.start_time) & Q(end_time__gte=self.end_time)):
-             super().save(*args, **kwargs)
-        else:
-            print('NONONO')
 
     def __str__(self):
         return str(self.title)
@@ -68,6 +55,27 @@ class Order(BaseModel):
 
     def get_absolute_url(self):
         return reverse("orders:order", kwargs={"slug": self.slug})
+    
+    def clean(self):
+        super().clean()
+        if self.end_time <= self.start_time:
+            raise ValidationError('Время окончания выполнения заказа должно быть больше времени начала заказа')
+        if self.end_time == self.start_time:
+            raise ValidationError('Время окончания выполнения заказа не должно равняться времени начала заказа')
+        
+        overlapping_orders = Order.objects.filter(
+            start_time__lt=self.end_time,
+            end_time__gt=self.start_time,
+
+            
+        ).exclude(pk=self.pk)
+        if overlapping_orders.exists():
+            raise ValidationError(f'В данное время принтер занят заказом { overlapping_orders }')
+        # return 
+    
+    def save(self, *args, **kwargs):
+        self.clean()
+        return super().save(*args, **kwargs)
 
     @property
     def time_difference(self):

@@ -4,6 +4,7 @@ from django.urls import reverse
 from core.models import BaseModel
 
 
+
 class Printer(BaseModel):
     STATUS_CHOICE = (
         ("work", "В работе"),
@@ -39,3 +40,10 @@ class Printer(BaseModel):
 
     def get_absolute_url(self):
         return reverse("printers:printer", kwargs={"slug": self.slug})
+    
+    def save(self, *args, **kwargs):
+        from timeline.models import Timeline
+        created = not self.pk
+        super().save(*args,**kwargs)
+        if created:
+            Timeline.objects.create(printer=self)
