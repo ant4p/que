@@ -55,24 +55,28 @@ class Order(BaseModel):
 
     def get_absolute_url(self):
         return reverse("orders:order", kwargs={"slug": self.slug})
-    
+
     def clean(self):
         super().clean()
         if self.end_time <= self.start_time:
-            raise ValidationError('Время окончания выполнения заказа должно быть больше времени начала заказа')
+            raise ValidationError(
+                "Время окончания выполнения заказа должно быть больше времени начала заказа"
+            )
         if self.end_time == self.start_time:
-            raise ValidationError('Время окончания выполнения заказа не должно равняться времени начала заказа')
-        
+            raise ValidationError(
+                "Время окончания выполнения заказа не должно равняться времени начала заказа"
+            )
+
         overlapping_orders = Order.objects.filter(
             start_time__lt=self.end_time,
             end_time__gt=self.start_time,
-
-            
         ).exclude(pk=self.pk)
         if overlapping_orders.exists():
-            raise ValidationError(f'В данное время принтер занят заказом { overlapping_orders }')
-        # return 
-    
+            raise ValidationError(
+                f"В данное время принтер занят заказом { overlapping_orders }"
+            )
+        # return
+
     def save(self, *args, **kwargs):
         self.clean()
         return super().save(*args, **kwargs)
